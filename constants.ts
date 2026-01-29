@@ -1,24 +1,82 @@
 
-import { UnitType, Card, Building, TempleUpgrade } from './types';
+import { UnitType, Card } from './types';
 
-export const CANVAS_WIDTH = 400;
-export const CANVAS_HEIGHT = 650;
+export const ARENA_WIDTH = 400;
+export const ARENA_HEIGHT = 700;
+export const MAX_ELIXIR = 10;
+export const ELIXIR_REGEN_RATE = 0.6; // Um pouco mais rápido para dinamismo
+export const MATCH_DURATION = 180;
 
 export const CARDS: Card[] = [
-  { id: UnitType.WARRIOR, name: 'Guerreiro', cost: 3, description: 'Balanceado e corajoso.', icon: '⚔️' },
-  { id: UnitType.ARCHER, name: 'Arqueira', cost: 2, description: 'Ataque à distância.', icon: '🏹' },
-  { id: UnitType.GIANT, name: 'Gigante', cost: 5, description: 'Foca apenas em torres.', icon: '🧱' },
-  { id: UnitType.WIZARD, name: 'Mago', cost: 4, description: 'Dano em área massivo.', icon: '🔥' }
+  {
+    type: UnitType.SOLDIER,
+    name: 'Cavaleiro',
+    cost: 3,
+    description: 'Guerreiro de espada.',
+    icon: '🛡️'
+  },
+  {
+    type: UnitType.ARCHER,
+    name: 'Arqueira',
+    cost: 3,
+    description: 'Ataque à distância.',
+    icon: '🏹'
+  },
+  {
+    type: UnitType.TANK,
+    name: 'Gigante',
+    cost: 5,
+    description: 'Muita vida, foco em torres.',
+    icon: '👹'
+  }
 ];
 
-export const INITIAL_BUILDINGS: Building[] = [
-  { id: 'b1', name: 'Fazenda', level: 1, type: 'farm', baseProduction: 10 },
-  { id: 'b2', name: 'Mina', level: 1, type: 'mine', baseProduction: 10 },
-  { id: 'b3', name: 'Mercado', level: 1, type: 'market', baseProduction: 5 }
-];
+export const UNIT_STATS = {
+  [UnitType.SOLDIER]: {
+    hp: 250,
+    damage: 25,
+    speed: 1.4,
+    range: 35,
+    cooldown: 800,
+    size: 14,
+    color: '#3B82F6',
+    emoji: '⚔️'
+  },
+  [UnitType.ARCHER]: {
+    hp: 140,
+    damage: 18,
+    speed: 1.7,
+    range: 150,
+    cooldown: 1100,
+    size: 12,
+    color: '#10B981',
+    emoji: '🏹'
+  },
+  [UnitType.TANK]: {
+    hp: 800,
+    damage: 40,
+    speed: 0.7,
+    range: 40,
+    cooldown: 1500,
+    size: 22,
+    color: '#F59E0B',
+    emoji: '👹'
+  }
+};
 
-export const TEMPLE_UPGRADES: TempleUpgrade[] = [
-  { id: 'u1', name: 'Poder Ancestral', description: 'Aumenta o dano de todas as unidades.', level: 0, costPerLevel: 20, multiplier: 0.1 },
-  { id: 'u2', name: 'Escudo Sagrado', description: 'Aumenta a vida das torres.', level: 0, costPerLevel: 15, multiplier: 0.15 },
-  { id: 'u3', name: 'Energia Mística', description: 'Regeneração de energia mais rápida.', level: 0, costPerLevel: 50, multiplier: 0.05 }
-];
+export const BUILDING_STATS = {
+  BASE: {
+    hp: 2500,
+    damage: 60,
+    range: 160,
+    cooldown: 1000,
+    size: 50
+  },
+  TOWER: {
+    hp: 1400,
+    damage: 35,
+    range: 200,
+    cooldown: 850,
+    size: 38
+  }
+};

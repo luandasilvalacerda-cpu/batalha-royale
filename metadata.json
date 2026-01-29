@@ -1,6 +1,5 @@
-
 {
-  "name": "Reino dos Fragmentos",
-  "description": "Um jogo mobile de batalha de cartas, construção de vila e upgrades de templo inspirado em Clash Royale, totalmente em português.",
+  "name": "Battle Towers Arena",
+  "description": "A real-time strategy arena battler where you summon units to destroy enemy towers while defending your own. Features elixir-based card mechanics and challenging AI.",
   "requestFramePermissions": []
 }

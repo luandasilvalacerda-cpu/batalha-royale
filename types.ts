@@ -1,71 +1,72 @@
 
-export enum GameMode {
-  VILLAGE = 'VILLAGE',
-  BATTLE = 'BATTLE',
-  TEMPLE = 'TEMPLE'
-}
+export type Side = 'PLAYER' | 'ENEMY';
 
 export enum UnitType {
-  WARRIOR = 'WARRIOR',
+  SOLDIER = 'SOLDIER',
   ARCHER = 'ARCHER',
-  GIANT = 'GIANT',
-  WIZARD = 'WIZARD'
+  TANK = 'TANK'
 }
 
-export interface Unit {
+export type ArenaTheme = 
+  | 'FOREST' 
+  | 'ICE' 
+  | 'LAVA' 
+  | 'DESERT' 
+  | 'SKY' 
+  | 'TOXIC' 
+  | 'CYBER' 
+  | 'DEEP_SEA' 
+  | 'GOLDEN' 
+  | 'VOID';
+
+export interface Entity {
   id: string;
-  type: UnitType;
+  side: Side;
   x: number;
   y: number;
-  health: number;
-  maxHealth: number;
-  damage: number;
+  hp: number;
+  maxHp: number;
+  isDead: boolean;
+}
+
+export interface Building extends Entity {
+  type: 'BASE' | 'TOWER';
   range: number;
-  speed: number;
-  owner: 'player' | 'enemy';
-  targetId: string | null;
-  lastAttackTime: number;
+  damage: number;
   attackCooldown: number;
+  lastAttackTime: number;
 }
 
-export interface Tower {
-  id: string;
-  x: number;
-  y: number;
-  health: number;
-  maxHealth: number;
-  owner: 'player' | 'enemy';
-  isMain: boolean;
+export interface Unit extends Entity {
+  type: UnitType;
+  speed: number;
+  range: number;
+  damage: number;
+  attackCooldown: number;
+  lastAttackTime: number;
+  targetId: string | null;
+  state: 'MOVING' | 'ATTACKING';
 }
 
 export interface Card {
-  id: UnitType;
+  type: UnitType;
   name: string;
   cost: number;
   description: string;
   icon: string;
 }
 
-export interface Resources {
-  food: number;
-  materials: number;
-  coins: number;
-  fragments: number;
-}
-
-export interface Building {
-  id: string;
-  name: string;
-  level: number;
-  type: 'farm' | 'mine' | 'market';
-  baseProduction: number;
-}
-
-export interface TempleUpgrade {
-  id: string;
-  name: string;
-  description: string;
-  level: number;
-  costPerLevel: number;
-  multiplier: number;
+export interface GameState {
+  playerName: string;
+  playerElixir: number;
+  enemyElixir: number;
+  buildings: Building[];
+  units: Unit[];
+  status: 'START_SCREEN' | 'PLAYING' | 'GAME_OVER';
+  winner: Side | null;
+  timeLeft: number;
+  playerCrowns: number;
+  enemyCrowns: number;
+  trophies: number;
+  arenaLevel: number;
 }
